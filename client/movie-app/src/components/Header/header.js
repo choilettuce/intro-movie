@@ -6,7 +6,8 @@ import './header.css';
 function Header() {
   return (
     <div className='header'>
-        <Link to="/"><MovieIcon className='MovieIcon' />Lettuce의 영화소개</Link>
+        <Link to="/" className='Logo'><MovieIcon sx={{ fontSize: 100 }} />
+        <p className='logoText'>Lettuce의 영화소개</p></Link>
         <h1>헤더 에어리어</h1>
     </div>
   )
