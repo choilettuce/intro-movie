@@ -1,10 +1,13 @@
 import {BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./route/Home";
 import Detail from "./route/Detail";
+import Header from "./components/Header/header";
+import "./App.css";
 
 function App() {
   return (
     <BrowserRouter>
+      <Header/>
       <Routes>
         <Route path="/movie/:id" element={<Detail/>} />
         <Route path="/" element ={<Home />} />

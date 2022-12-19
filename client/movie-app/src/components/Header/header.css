@@ -1,0 +1,11 @@
+.header {
+    display: flex ;
+    flex-direction: row;
+    background-color: antiquewhite;
+    justify-content: space-between;
+}
+
+.MovieIcon {
+    height: 50px;
+    
+}
