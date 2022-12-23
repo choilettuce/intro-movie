@@ -3,6 +3,7 @@ import Home from "./route/Home/Home";
 import Detail from "./route/Detail/Detail";
 import Header from "./components/Header/header";
 import "./App.css";
+import Login from "./components/login/login";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Routes >
         <Route path="/movie/:id" element={<Detail />} />
         <Route path="/" element ={<Home />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
      </BrowserRouter>
   );

@@ -13,8 +13,8 @@ function Header() {
         <span className='logoText'>Lettuce의 영화소개</span >
         </Link>
       </div>  
-      <div className='login'>
-        <button>로그인</button>
+      <div className='Login'>
+        <Link to ="/Login" className='Login'><button>로그인</button></Link>
         <button>회원가입</button>
       </div>
     </div>

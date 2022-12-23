@@ -15,7 +15,7 @@ function Detail({coverImg, title, summary, genres, year}) {
     useEffect(() => {
       getMovie();
     }, []);
-
+ 
 
     return (
     <div className='movie'>
