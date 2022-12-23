@@ -1,7 +1,7 @@
 const mysql = require('mysql2/promise');
 
 const pool = mysql.createPool({
-    host : "127.0.0.1",
+    host : "localhost",
     port : 3306,
     database : "LFW",
     username : "LFW",
@@ -22,6 +22,6 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
-app.listen('8000', () => {
-    console.log('8000');
+app.listen('5000', () => {
+    console.log('5000');
 });

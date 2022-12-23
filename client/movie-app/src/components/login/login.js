@@ -21,8 +21,11 @@ function Login() {
  
 	// 페이지 렌더링 후 가장 처음 호출되는 함수
     useEffect(() => {
-        axios.get('/user_inform/login')
-        .then(res => console.log(res))
+        axios.post('https://localhost:8000')
+        .then(res => {
+            console.log(res)
+            console.log('res.data.userId :: ', res.data.userId)
+            console.log('res.data.pw :: ', res.data.pw) })
         .catch()
     },
     // 페이지 호출 후 처음 한번만 호출될 수 있도록 [] 추가
