@@ -1,42 +1,45 @@
 import React from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import propTypes from 'prop-types';
+import { useState } from "react";
 import "./Detail.css";
+// import axios from "axios";
 
-function Detail({coverImg, title, summary, genres, year}) {
-    const { id } = useParams();
-    const getMovie = async () => {
-      const json = await (
-        await fetch(`https://yts.mx/api/v2/movie_details.json?movie_id=${id}`)
-      ).json();
-      console.log(json);
-    };
-    useEffect(() => {
-      getMovie();
-    }, []);
- 
+// {coverImg, title, summary, genres, year}
+function Detail() {
+  const [loading, setLoading] = useState(true);
+  const [movies, setMovies] = useState([]);
+  const { id } = useParams();
+  const getMovies = async () => {
+  const json = await (
+      await fetch(
+        `https://yts.mx/api/v2/movie_details.json?movie_id=${id}`
+      )
+    ).json();
+    setMovies(json.data.movies);
+    setLoading(false);
+  };
 
-    return (
-    <div className='movie'>
-      <img src={coverImg} alt={title} className="movieImg"/>
-      <h2 className='movieTitle'>{title}</h2>
-      <h3 className="styles.movieYear">{year}</h3>
-      <p>{summary}</p>
-      <ul className='movieGenre'>
-        {genres.map((g) => (<li key={g}>{g}</li>))}
-      </ul>
+  useEffect (() => {
+      getMovies();
+  },);
+
+  console.log(movies);
+  return (
+    <div className='container'>
+    {/* <div className='loader'>
+      {loading ? (<h1>loading...</h1>) : 
+      (<div className='movies'>{movies.map(movie =>
+      <Movie key={movie.id}
+      id={movie.id}
+      coverImg={movie.medium_cover_image}
+      title={movie.title}
+      year={movie.year}
+      summary={movie.summary}
+      genres={movie.genres} /> )}</div>)}
+    </div> */}
     </div>
-
-    )
-};
-
-Detail.propTypes = {
-  id : propTypes.number.isRequired,
-  coverImg : propTypes.string.isRequired,
-  title :  propTypes.string.isRequired,
-  summary :  propTypes.string.isRequired,
-  genres : propTypes.arrayOf(propTypes.string).isRequired
-};
+  );
+}
 
 export default Detail;
