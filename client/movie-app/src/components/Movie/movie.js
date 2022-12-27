@@ -8,7 +8,16 @@ function Movie({id,coverImg, title, summary, genres, year}) {
     return (
     <div className='movie'>
         <img src={coverImg} alt={title} className="movieImg"/>
-        <h2 className='movieTitle'><Link to={`/movie/${id}`}>{title}</Link></h2>
+        <h2 className='movieTitle'><Link to={{
+              pathname: `/movie/${id}`,
+              state: {
+                id,
+                coverImg,
+                title,
+                summary,
+                genres,
+              },
+            }}>{title}</Link></h2>
         <h3 className="movieYear">{year}</h3>
         <p>{summary.length > 235 ? `${summary.slice(0,235)}` : summary}</p>
         <ul className='movieGenre'>
