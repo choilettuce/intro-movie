@@ -1,42 +1,47 @@
-import PropTypes from "prop-types";
-function MovieDetail({
-  coverImg,
-  title,
-  year,
-  genres,
-  description,
-  rating,
-  runtime,
-  download,
-  like,
-}) {
+import MovieDetail from "../../components/MovieDetail/MovieDetail";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
+function Detail(props) {
+  console.log(props);
+  const [loading, setLoading] = useState(true);
+  const [movie, setMovie] = useState([]);
+  const { id } = useParams();
+
+  const getMovie = async () => {
+    const json = await (
+      await fetch(`https://yts.mx/api/v2/movie_details.json?movie_id=${id}`)
+    ).json();
+    setMovie(json.data.movie);
+
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getMovie();
+  }, []);
+
   return (
-    <div className="card">
-      <img src={coverImg} alt={title} />
-      <div className="detail">
-        <h2 className="detail__title">{title}</h2>
-        <div className="detail__info">
-          <p>{year}년</p>
-          <p>{runtime}분</p>
+    <section className="container detailContainer">
+      {loading ? (
+        <div className="loader">
+          <span>Loading...</span>
         </div>
-        <div className="detail__rate">
-          <p>rate : {rating}</p>
-          <p>download : {download}</p>
-          <p>likes : {like}</p>
-        </div>
-        <p className="detail__desc">{description}</p>
-        <ul className="detail__genres">
-          {genres && genres.map((g) => <li key={g}>{g}</li>)}
-        </ul>
-      </div>
-    </div>
+      ) : (
+        <MovieDetail
+          key={movie.id}
+          coverImg={movie.medium_cover_image}
+          title={movie.title}
+          year={movie.year}
+          genres={movie.genres}
+          description={movie.description_full}
+          rating={movie.rating}
+          runtime={movie.runtime}
+          download={movie.download_count}
+          like={movie.like_count}
+        />
+      )}
+    </section>
   );
 }
-
-MovieDetail.propTypes = {
-  coverImg: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  year: PropTypes.number.isRequired,
-  genres: PropTypes.arrayOf(PropTypes.string),
-};
-export default MovieDetail;
+export default Detail;
