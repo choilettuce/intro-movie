@@ -1,12 +1,14 @@
 import React, {useState, useEffect, useRef} from "react";
 import { ReactDOM } from "react";
 
-function carousel() {
+function carousel({id,coverImg, title, summary, genres, year}) {
     const [current, setCurrent] = useState(0);
     const [style, setStyle] = useState({
         marginLeft : `-${current}00%`
     });
     const imgSize = useRef(images.current.length);
+
+    const images = [coverImg]
 
     const moveSlide = (i) => {
         let nextIndex = current + i;
@@ -17,9 +19,37 @@ function carousel() {
 
         setCurrent(nextIndex);
     };
+    useEffect(() => {
+      setStyle({ marginLeft :`-${current}00%`});
+    }, [current]);
   return (
-    <div>carousel</div>
+    <div className="container">
+    <div className="slide">
+      <div className="btn" onClick={() => { moveSlide(-1); }}>&lt;</div>
+      <div className="window">
+        <div className="flexbox" style={style}>
+          {images.current.map((img, i) => (
+            <div
+              key={i}
+              className="img"
+              style={{ backgroundImage: `url(${img.src})` }}
+            ></div>
+          ))}
+        </div>
+      </div>
+      <div className="btn" onClick={() => { moveSlide(1); }}>&gt;</div>
+    </div>
+    <div className="position">
+      {images.current.map((x, i) => (
+        <div
+          key={i}
+          className={i === current ? 'dot current' : 'dot'}
+          ></div>
+       ))}
+    </div>
+  </div>
+
   )
 }
 
-export default carousel
+export default carousel;
