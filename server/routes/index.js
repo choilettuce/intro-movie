@@ -58,12 +58,6 @@ MainRouter.get('/', main.index);   //메인페이지 화면
 
 
 
-/* Weather 관련 */
-const WeatherRouter = express.Router();
-const weather = require('../controller/WeatherController');
-WeatherRouter.get('/', weather.weather_index);  //weather페이지
-WeatherRouter.post('/getlocation', weather.getlocation); //현위치로 날씨정보 받아오기
-WeatherRouter.post('/searchlocation', weather.searchlocation); //현위치로 날씨정보 받아오기
 
 
 /* OOTD 관련 */
